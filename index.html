@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eclipse Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #030000;
+      color: #eeba70;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    .countdown {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>2024 Total Solar Eclipse Countdown</h1>
+  <h2> <span id="countdown"></span></h2> <!-- Move this here -->
+  <img src="./eclipse.jpeg" alt="eclipse" width="500">
+  <h3> E para todos reunidos no aeroporto:</h3>
+  <h4><span id="countdown2"></span></h4> <!-- Move this here -->
+
+
+
+
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2024-04-08T14:04:00").getTime();
+      const targetDate2 = new Date("2024-04-06T09:04:00").getTime();
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      const difference2 = targetDate2 - now;
+
+      if (difference <= 0) {
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "ENJOY THE ECLIPSE VIEWING NOW!";
+        document.getElementById("countdown2").innerHTML = "ENJOY THE ECLIPSE VIEWING NOW!";
+      } else {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        const countdownText = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        const countdownText2 = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`
+        document.getElementById("countdown").textContent = countdownText; // Changed to textContent
+        document.getElementById("countdown2").textContent = countdownText2; // Changed to textContent
+      }
+
+      if (difference2 <= 0) {
+        clearInterval(interval);
+        document.getElementById("countdown2").innerHTML = "Countdown finished!";
+      } else {
+        const days2 = Math.floor(difference2 / (1000 * 60 * 60 * 24));
+        const hours2 = Math.floor((difference2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes2 = Math.floor((difference2 % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds2 = Math.floor((difference2 % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown2").textContent = `${days2} Days ${hours2} Hours ${minutes2} Minutes ${seconds2} Seconds`;
+      }
+    }
+
+
+
+    // Call updateCountdown() every second
+    const interval = setInterval(updateCountdown, 1000);
+
+    // Initial call to update countdown immediately
+    updateCountdown();
+  </script>
+</body>
+
+</html>
